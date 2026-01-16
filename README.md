@@ -2,8 +2,8 @@
 
 A minimalist, high-performance RSVP (Rapid Serial Visual Presentation) reading extension for Google Chrome. Fast Reader helps you read text significantly faster by displaying words one by one at a fixed focal point, eliminating the need for eye movements (saccades).
 
-![Fast Reader Preview](<img width="2703" height="1524" alt="image" src="https://github.com/user-attachments/assets/28babab7-6a79-461a-9264-b42a47b8ea9d" />
-)
+<img width="2703" height="1524" alt="image" src="https://github.com/user-attachments/assets/6f63d2ee-8fda-46ca-9006-0d9a5858a305" />
+
 
 ## Features
 
