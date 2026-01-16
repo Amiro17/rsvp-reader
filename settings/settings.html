@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP Reader Settings</title>
+    <link rel="stylesheet" href="settings.css">
+</head>
+
+<body>
+    <div class="settings-container">
+        <header class="settings-header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">Fast</span>
+                    <h1>Reader Settings</h1>
+                </div>
+                <button class="btn-reset" id="reset-settings">Reset to Defaults</button>
+            </div>
+        </header>
+
+        <main class="settings-main">
+            <!-- LIVE PREVIEW -->
+            <section class="preview-section" id="preview-section">
+                <h2>Preview</h2>
+                <div class="preview-word-display" id="preview-display">
+                    <span class="preview-before" id="preview-before">Ex</span>
+                    <span class="preview-orp" id="preview-orp">a</span>
+                    <span class="preview-after" id="preview-after">mple</span>
+                </div>
+            </section>
+
+            <!-- Speed Settings -->
+            <section class="settings-section">
+                <h2>Speed Settings</h2>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="baseWPM">Base Reading Speed</label>
+                        <span class="setting-description">Words per minute when at full speed</span>
+                    </div>
+                    <div class="setting-control">
+                        <input type="range" id="baseWPM" min="50" max="1000" step="25" value="300">
+                        <div class="range-value"><span id="baseWPM-value">300</span> WPM</div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="rampWords">Speed Ramp Duration</label>
+                        <span class="setting-description">Number of words to reach full speed</span>
+                    </div>
+                    <div class="setting-control">
+                        <input type="range" id="rampWords" min="0" max="50" step="5" value="20">
+                        <div class="range-value"><span id="rampWords-value">20</span> words</div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="startSpeedRatio">Starting Speed Ratio</label>
+                        <span class="setting-description">Initial speed as % of target (for ramp-up)</span>
+                    </div>
+                    <div class="setting-control">
+                        <input type="range" id="startSpeedRatio" min="0.3" max="1" step="0.1" value="0.5">
+                        <div class="range-value"><span id="startSpeedRatio-value">50</span>%</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Punctuation Pauses -->
+            <section class="settings-section">
+                <h2>Punctuation Pauses</h2>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="commaPause">Comma Pause (,;:)</label>
+                        <span class="setting-description">Delay multiplier for minor punctuation</span>
+                    </div>
+                    <div class="setting-control">
+                        <input type="range" id="commaPause" min="1" max="3" step="0.1" value="1.5">
+                        <div class="range-value"><span id="commaPause-value">1.5</span>x</div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="periodPause">Period Pause (.!?)</label>
+                        <span class="setting-description">Delay multiplier for sentence endings</span>
+                    </div>
+                    <div class="setting-control">
+                        <input type="range" id="periodPause" min="1" max="4" step="0.1" value="2">
+                        <div class="range-value"><span id="periodPause-value">2.0</span>x</div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="paragraphPause">Paragraph Pause</label>
+                        <span class="setting-description">Delay multiplier at paragraph breaks</span>
+                    </div>
+                    <div class="setting-control">
+                        <input type="range" id="paragraphPause" min="1" max="5" step="0.1" value="3">
+                        <div class="range-value"><span id="paragraphPause-value">3.0</span>x</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Display Settings -->
+            <section class="settings-section">
+                <h2>Display Settings</h2>
+
+                <!-- Theme Presets -->
+                <div class="setting-item theme-presets-container">
+                    <div class="setting-info">
+                        <label>Theme Presets</label>
+                        <span class="setting-description">Choose a preset or customize below</span>
+                    </div>
+                    <div class="theme-presets-grid">
+                        <button class="theme-preset" data-preset="dark" title="Dark">
+                            <div class="preset-preview preset-dark"></div>
+                            <span>Dark</span>
+                        </button>
+                        <button class="theme-preset" data-preset="light" title="Light">
+                            <div class="preset-preview preset-light"></div>
+                            <span>Light</span>
+                        </button>
+                        <button class="theme-preset" data-preset="sepia" title="Sepia">
+                            <div class="preset-preview preset-sepia"></div>
+                            <span>Sepia</span>
+                        </button>
+                        <button class="theme-preset" data-preset="night" title="Night">
+                            <div class="preset-preview preset-night"></div>
+                            <span>Night</span>
+                        </button>
+                        <button class="theme-preset" data-preset="ocean" title="Ocean">
+                            <div class="preset-preview preset-ocean"></div>
+                            <span>Ocean</span>
+                        </button>
+                        <button class="theme-preset" data-preset="forest" title="Forest">
+                            <div class="preset-preview preset-forest"></div>
+                            <span>Forest</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="setting-item" style="display:none;">
+                    <div class="setting-info">
+                        <label for="theme">Theme</label>
+                        <span class="setting-description">Color scheme for the reader</span>
+                    </div>
+                    <div class="setting-control">
+                        <select id="theme">
+                            <option value="dark">Dark</option>
+                            <option value="light">Light</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="fontFamily">Font Family</label>
+                        <span class="setting-description">Font used for word display</span>
+                    </div>
+                    <div class="setting-control">
+                        <select id="fontFamily">
+                            <option value="Georgia, serif">Georgia (Default)</option>
+                            <option value="Inter, system-ui, sans-serif">Inter</option>
+                            <option value="Arial, sans-serif">Arial</option>
+                            <option value="'Times New Roman', serif">Times New Roman</option>
+                            <option value="Consolas, monospace">Consolas</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="fontSize">Font Size</label>
+                        <span class="setting-description">Size of the displayed word</span>
+                    </div>
+                    <div class="setting-control">
+                        <input type="range" id="fontSize" min="24" max="96" step="4" value="48">
+                        <div class="range-value"><span id="fontSize-value">48</span>px</div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="orpColor">ORP Highlight Color</label>
+                        <span class="setting-description">Color for the focus letter</span>
+                    </div>
+                    <div class="setting-control">
+                        <input type="color" id="orpColor" value="#ff4444">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trail Settings -->
+            <section class="settings-section">
+                <h2>Fading Trail & Preview</h2>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="showTrail">Show Previous Words</label>
+                        <span class="setting-description">Display fading trail of previous words</span>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="showTrail" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="setting-item" id="trailDirection-container">
+                    <div class="setting-info">
+                        <label for="trailDirection">Trail Direction</label>
+                        <span class="setting-description">Where previous words appear</span>
+                    </div>
+                    <div class="setting-control">
+                        <select id="trailDirection">
+                            <option value="up">From Above (↑)</option>
+                            <option value="left">From Left (←)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-item" id="trailLength-container">
+                    <div class="setting-info">
+                        <label for="trailLength">Trail Length</label>
+                        <span class="setting-description">Number of previous words to show</span>
+                    </div>
+                    <div class="setting-control">
+                        <input type="range" id="trailLength" min="1" max="5" step="1" value="3">
+                        <div class="range-value"><span id="trailLength-value">3</span> words</div>
+                    </div>
+                </div>
+
+                <div class="setting-item" id="trailOpacity-container">
+                    <div class="setting-info">
+                        <label for="trailOpacity">Trail Opacity</label>
+                        <span class="setting-description">Starting opacity for trail words</span>
+                    </div>
+                    <div class="setting-control">
+                        <input type="range" id="trailOpacity" min="0.1" max="0.8" step="0.1" value="0.4">
+                        <div class="range-value"><span id="trailOpacity-value">40</span>%</div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="showPreview">Show Next Words</label>
+                        <span class="setting-description">Preview upcoming words below</span>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="showPreview" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Behavior Settings -->
+            <section class="settings-section">
+                <h2>Behavior</h2>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="autoClose">Auto-close on Finish</label>
+                        <span class="setting-description">Close reader when text is complete</span>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="autoClose">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="showProgress">Show Progress Bar</label>
+                        <span class="setting-description">Display reading progress</span>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="showProgress" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Keyboard Shortcuts Reference -->
+            <section class="settings-section">
+                <h2>Keyboard Shortcuts</h2>
+
+                <div class="shortcuts-grid">
+                    <div class="shortcut-item">
+                        <kbd>Alt</kbd> + <kbd>R</kbd>
+                        <span>Start reading selection</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>Space</kbd>
+                        <span>Play / Pause</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>Esc</kbd>
+                        <span>Close reader</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>↑</kbd> / <kbd>+</kbd>
+                        <span>Increase speed</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>↓</kbd> / <kbd>-</kbd>
+                        <span>Decrease speed</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>←</kbd> / <kbd>→</kbd>
+                        <span>Seek backward / forward</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>R</kbd>
+                        <span>Restart</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="settings-footer">
+            <p>Fast Reader v1.1.0 • Made for faster reading</p>
+        </footer>
+    </div>
+
+    <script src="settings.js"></script>
+</body>
+
+</html>

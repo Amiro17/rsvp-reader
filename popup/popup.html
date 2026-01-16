@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSVP Reader</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div class="popup-container">
+    <header class="popup-header">
+      <div class="logo">
+        <span class="logo-icon">Fast</span>
+        <span class="logo-text">Reader</span>
+      </div>
+    </header>
+
+    <main class="popup-main">
+      <div class="status-section">
+        <div class="status-indicator" id="status">
+          <span class="status-dot"></span>
+          <span class="status-text">Ready</span>
+        </div>
+      </div>
+
+      <div class="instruction-section">
+        <p class="instruction">
+          <strong>Select text</strong> on any webpage, then right-click and choose <strong>"Read with Fast
+            Reader"</strong>
+        </p>
+        <p class="shortcut">
+          Or use <kbd>Alt</kbd> + <kbd>R</kbd>
+        </p>
+      </div>
+
+      <div class="quick-settings">
+        <h3>Quick Settings</h3>
+
+        <div class="setting-row">
+          <label for="speed">Reading Speed</label>
+          <div class="speed-control">
+            <button class="btn-speed" id="speed-down">−</button>
+            <span class="speed-value" id="speed-value">300</span>
+            <span class="speed-unit">WPM</span>
+            <button class="btn-speed" id="speed-up">+</button>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <label for="theme">Theme</label>
+          <div class="theme-toggle">
+            <button class="theme-btn active" id="theme-dark" data-theme="dark">Dark</button>
+            <button class="theme-btn" id="theme-light" data-theme="light">Light</button>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <label for="trail">Show Previous Words</label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="trail-toggle" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-primary" id="btn-start">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          Start Reading Selection
+        </button>
+        <button class="btn-secondary" id="btn-write">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+          </svg>
+          Write Your Own Text
+        </button>
+      </div>
+    </main>
+
+    <footer class="popup-footer">
+      <a href="#" id="open-settings">Advanced Settings</a>
+      <span class="version">v1.0.0</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>
