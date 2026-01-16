@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="#1a1a1a"/>
+  
+  <!-- Stylized "F" with speed lines -->
+  <g fill="#e0e0e0">
+    <!-- Main F stem -->
+    <rect x="40" y="32" width="12" height="64" rx="2"/>
+    <!-- Top bar -->
+    <rect x="40" y="32" width="48" height="10" rx="2"/>
+    <!-- Middle bar -->
+    <rect x="40" y="56" width="36" height="8" rx="2"/>
+  </g>
+  
+  <!-- Speed accent line -->
+  <rect x="76" y="80" width="20" height="4" rx="2" fill="#4a9a6a"/>
+</svg>

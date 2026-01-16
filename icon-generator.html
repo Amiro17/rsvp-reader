@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Icon Generator - Fast Reader</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            padding: 40px;
+            background: #1a1a1a;
+            color: #e0e0e0;
+        }
+
+        .icons {
+            display: flex;
+            gap: 40px;
+            align-items: end;
+            margin: 30px 0;
+        }
+
+        .icon-container {
+            text-align: center;
+        }
+
+        canvas {
+            background: #333;
+            border-radius: 8px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: #4a9a6a;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #3a8a5a;
+        }
+
+        h1 {
+            color: #4a9a6a;
+        }
+
+        .instructions {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Fast Reader Icon Generator</h1>
+    <p>Click each button to download the PNG icon.</p>
+
+    <div class="icons">
+        <div class="icon-container">
+            <canvas id="canvas16" width="16" height="16"></canvas>
+            <p>16x16</p>
+            <button onclick="download(16)">Download</button>
+        </div>
+        <div class="icon-container">
+            <canvas id="canvas32" width="32" height="32"></canvas>
+            <p>32x32</p>
+            <button onclick="download(32)">Download</button>
+        </div>
+        <div class="icon-container">
+            <canvas id="canvas48" width="48" height="48"></canvas>
+            <p>48x48</p>
+            <button onclick="download(48)">Download</button>
+        </div>
+        <div class="icon-container">
+            <canvas id="canvas128" width="128" height="128"></canvas>
+            <p>128x128</p>
+            <button onclick="download(128)">Download</button>
+        </div>
+    </div>
+
+    <div class="instructions">
+        <h3>Instructions:</h3>
+        <ol>
+            <li>Download all 4 icons</li>
+            <li>Replace the files in <code>assets/icons/</code></li>
+            <li>Reload the extension</li>
+        </ol>
+    </div>
+
+    <script>
+        function drawIcon(ctx, size) {
+            const scale = size / 128;
+            const cx = 64 * scale;
+            const cy = 64 * scale;
+
+            // Background circle - dark
+            ctx.fillStyle = '#1a1a1a';
+            ctx.beginPath();
+            ctx.arc(cx, cy, 60 * scale, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Three horizontal lines (representing words/text flowing)
+            ctx.fillStyle = '#606060';
+
+            // Top line - shorter
+            roundRect(ctx, 28 * scale, 38 * scale, 28 * scale, 4 * scale, 2 * scale);
+
+            // Middle line - longest (the focused word)
+            ctx.fillStyle = '#e0e0e0';
+            roundRect(ctx, 24 * scale, 52 * scale, 52 * scale, 5 * scale, 2 * scale);
+
+            // Bottom line - shorter  
+            ctx.fillStyle = '#606060';
+            roundRect(ctx, 28 * scale, 66 * scale, 28 * scale, 4 * scale, 2 * scale);
+
+            // Focus point circle (the ORP indicator)
+            ctx.fillStyle = '#4a9a6a';
+            ctx.beginPath();
+            ctx.arc(44 * scale, 54.5 * scale, 7 * scale, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Speed lines on the right (motion blur effect)
+            ctx.fillStyle = '#4a9a6a';
+            ctx.globalAlpha = 0.5;
+            roundRect(ctx, 84 * scale, 46 * scale, 14 * scale, 2.5 * scale, 1.5 * scale);
+            ctx.globalAlpha = 0.3;
+            roundRect(ctx, 88 * scale, 54 * scale, 10 * scale, 2.5 * scale, 1.5 * scale);
+            ctx.globalAlpha = 0.5;
+            roundRect(ctx, 84 * scale, 62 * scale, 14 * scale, 2.5 * scale, 1.5 * scale);
+            ctx.globalAlpha = 1;
+
+            // "FR" text at bottom (Fast Reader)
+            ctx.fillStyle = '#808080';
+            ctx.font = `bold ${20 * scale}px Arial, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('FR', cx, 90 * scale);
+        }
+
+        function roundRect(ctx, x, y, w, h, r) {
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.lineTo(x + w - r, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+            ctx.lineTo(x + w, y + h - r);
+            ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+            ctx.lineTo(x + r, y + h);
+            ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+            ctx.lineTo(x, y + r);
+            ctx.quadraticCurveTo(x, y, x + r, y);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function download(size) {
+            const canvas = document.getElementById('canvas' + size);
+            const link = document.createElement('a');
+            link.download = 'icon' + size + '.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // Draw all sizes on load
+        [16, 32, 48, 128].forEach(size => {
+            const canvas = document.getElementById('canvas' + size);
+            const ctx = canvas.getContext('2d');
+            drawIcon(ctx, size);
+        });
+    </script>
+</body>
+
+</html>
